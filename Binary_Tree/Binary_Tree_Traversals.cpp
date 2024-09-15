@@ -70,6 +70,9 @@ public:
         postOrderTraversal(node->right);
         cout << node->val << " ";
     }
+
+    //Level Order Traversal also known as BFS(Breadth First Search).
+
 };
 
 int main()
