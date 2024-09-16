@@ -1,0 +1,25 @@
+Types of Binary Trees:
+
+Full Binary Tree: Every node has either 0 or 2 children.
+Complete Binary Tree: All levels are fully filled except possibly the last level, which is filled from left to right.
+Perfect Binary Tree: All internal nodes have exactly two children, and all leaf nodes are at the same level.
+Balanced Binary Tree: The height of the tree is minimized, often referring to AVL trees or Red-Black trees.
+Binary Search Tree (BST): A binary tree where for each node, all nodes in the left subtree have smaller values, and all nodes in the right subtree have larger values.
+
+Binary Tree Operations:
+
+Insertion: Adding nodes while maintaining the properties of the tree (e.g., BST properties).
+Deletion: Removing nodes and re-arranging the tree to maintain its properties.
+Searching: Finding nodes with specific values.
+
+Advanced Tree Concepts:
+
+% Height and Depth: Calculating the height of the tree (longest path from root to leaf) and depth of nodes.
+% Diameter of a Tree: The longest path between any two nodes in the tree.
+Tree Balancing: Techniques to keep the tree balanced, like AVL trees or Red-Black trees.
+
+Special Types of Binary Trees:
+
+AVL Trees: Self-balancing binary search trees with height-balanced property.
+Red-Black Trees: A type of self-balancing binary search tree with color properties to ensure balance.
+Splay Trees: Self-adjusting binary search trees with a splay operation to move frequently accessed elements to the root.
