@@ -71,8 +71,8 @@ public:
         cout << node->val << " ";
     }
 
-    //Level Order Traversal also known as BFS(Breadth First Search).
-
+    // Level Order Traversal also known as BFS(Breadth First Search).
+    // Inorder, Preorder and Postorder Traversals are DFS(Depth First Search).
 };
 
 int main()
