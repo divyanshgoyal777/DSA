@@ -26,11 +26,15 @@ public:
 
     BinaryTree()
     {
-        root = new TreeNode(3);
-        root->left = new TreeNode(9);
-        root->right = new TreeNode(20);
-        root->right->left = new TreeNode(15);
+        root = new TreeNode(1);
+        root->left = new TreeNode(2);
+        root->right = new TreeNode(3);
+        root->left->left = new TreeNode(4);
+        root->left->right = new TreeNode(5);
+        root->left->left->left = new TreeNode(8);
+        root->right->left = new TreeNode(6);
         root->right->right = new TreeNode(7);
+        root->right->left->right = new TreeNode(9);
     }
 
     vector<vector<int>> zigzagLevelOrder(TreeNode *root)
@@ -42,7 +46,7 @@ public:
         }
         queue<TreeNode *> q;
         q.push(root);
-        bool leftToRight = true;
+        bool lr = true;
         while (!q.empty())
         {
             int size = q.size();
@@ -61,12 +65,18 @@ public:
                     q.push(temp->right);
                 }
             }
-            if (!leftToRight)
+            if (!lr)
             {
-                reverse(level.begin(), level.end());
+                // reverse(level.begin(), level.end());
+                vector<int> temp = level;
+                level.clear();
+                for (int nums : temp)
+                {
+                    level.insert(level.begin(), nums);
+                }
             }
             result.push_back(level);
-            leftToRight = !leftToRight;
+            lr = !lr;
         }
         return result;
     }
