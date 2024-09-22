@@ -60,7 +60,7 @@ vector<string> fullJustify(vector<string> &words, int maxWidth)
 int main()
 {
     vector<string> words = {"This", "is", "an", "example", "of", "text", "justification."};
-    int maxWidth = 16;
+    int maxWidth = 11;
     vector<string> result = fullJustify(words, maxWidth);
     for (string res : result)
     {

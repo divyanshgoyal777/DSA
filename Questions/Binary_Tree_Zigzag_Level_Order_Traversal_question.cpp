@@ -46,7 +46,7 @@ public:
         }
         queue<TreeNode *> q;
         q.push(root);
-        bool lr = true;
+        bool lr = false;
         while (!q.empty())
         {
             int size = q.size();
@@ -55,7 +55,14 @@ public:
             {
                 TreeNode *temp = q.front();
                 q.pop();
-                level.push_back(temp->val);
+                if (lr)
+                {
+                    level.insert(level.begin(), temp->val);
+                }
+                else
+                {
+                    level.push_back(temp->val);
+                }
                 if (temp->left != nullptr)
                 {
                     q.push(temp->left);
@@ -63,16 +70,6 @@ public:
                 if (temp->right != nullptr)
                 {
                     q.push(temp->right);
-                }
-            }
-            if (!lr)
-            {
-                // reverse(level.begin(), level.end());
-                vector<int> temp = level;
-                level.clear();
-                for (int nums : temp)
-                {
-                    level.insert(level.begin(), nums);
                 }
             }
             result.push_back(level);
