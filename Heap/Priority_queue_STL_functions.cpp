@@ -7,9 +7,15 @@ int main()
     priority_queue<int> q;
     q.push(10);
     q.push(12);
+    cout << "Size before popping: " << q.size() << endl;
+    cout << "Top Element before popping: " << q.top() << endl;
     q.pop();
-    q.empty() ? cout << "Empty" << endl : cout << "Not Empty" << endl;
-    cout << "Size: " << q.size() << endl;
-    cout << "Top Element: " << q.top() << endl;
+    cout << (q.empty() ? "Queue is Empty" : "Queue is Not Empty") << endl;
+    cout << "Size after popping: " << q.size() << endl;
+    if (!q.empty())
+    {
+        cout << "Top Element after popping: " << q.top() << endl;
+    }
+
     return 0;
 }
