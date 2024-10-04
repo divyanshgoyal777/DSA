@@ -8,7 +8,7 @@ int binarySearchRecursive(const std::vector<int> &nums, int target, int left, in
         return -1;
     }
 
-    int mid = left + (right - left) / 2; 
+    int mid = left + (right - left) / 2;
 
     if (nums[mid] == target)
     {

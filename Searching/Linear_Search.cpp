@@ -8,7 +8,7 @@ int linearSearch(const vector<int> &arr, int target)
     {
         if (arr[i] == target)
         {
-            return i; 
+            return i;
         }
     }
     return -1;
