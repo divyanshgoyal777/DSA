@@ -39,14 +39,6 @@ public:
         temp->eow = true;
     }
 
-    bool searchLetter(char letter)
-    {
-        letter = tolower(letter);
-        int idx = letter - 'a';
-        return searchInTrie(root, idx);
-    }
-
-private:
     bool searchInTrie(Node *node, int idx)
     {
         if (node->children[idx] != nullptr)
@@ -65,6 +57,27 @@ private:
         }
         return false;
     }
+
+    bool searchLetter(char letter)
+    {
+        letter = tolower(letter);
+        int idx = letter - 'a';
+        return searchInTrie(root, idx);
+    }
+
+    // bool search(string word)
+    // {
+    //     for (char ch : word)
+    //     {
+    //         int idx = ch - 'a';
+    //         if (node->children[idx] == nullptr)
+    //         {
+    //             return false;
+    //         }
+    //         node = node->children[idx];
+    //     }
+    //     return node->eow = true;
+    // }
 };
 
 int main()
@@ -72,24 +85,24 @@ int main()
     Trie trie;
     string word = "Hello";
     trie.insert(word);
-    char letter = 'o';
-    if (trie.searchLetter(letter))
-    {
-        cout << "Letter found!" << endl;
-    }
-    else
-    {
-        cout << "Letter not found!" << endl;
-    }
-    letter = 'a';
-    if (trie.searchLetter(letter))
-    {
-        cout << "Letter found!" << endl;
-    }
-    else
-    {
-        cout << "Letter not found!" << endl;
-    }
+    // char letter = 'o';
+    // if (trie.searchLetter(letter))
+    // {
+    //     cout << "Letter found!" << endl;
+    // }
+    // else
+    // {
+    //     cout << "Letter not found!" << endl;
+    // }
+    // letter = 'a';
+    // if (trie.searchLetter(letter))
+    // {
+    //     cout << "Letter found!" << endl;
+    // }
+    // else
+    // {
+    //     cout << "Letter not found!" << endl;
+    // }
 
     return 0;
 }
