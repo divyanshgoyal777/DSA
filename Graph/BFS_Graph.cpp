@@ -4,48 +4,61 @@ using namespace std;
 class Edge
 {
 public:
-    int dist;
+    int dest;
     int weight;
 
-    Edge(int dist, int weight)
+    Edge(int dest, int weight)
     {
-        this->dist = dist;
+        this->dest = dest;
         this->weight = weight;
     }
 };
+
+void bfs(vector<Edge> graph[], int src, bool isVisited[])
+{
+    queue<int> q;
+    isVisited[src] = true;
+    q.push(src);
+    while (!q.empty())
+    {
+        int curr = q.front();
+        q.pop();
+        cout << curr << " ";
+        for (int i = 0; i < graph[curr].size(); i++)
+        {
+            int neighbor = graph[curr][i].dest;
+            if (!isVisited[neighbor])
+            {
+                isVisited[neighbor] = true;
+                q.push(neighbor);
+            }
+        }
+    }
+}
 
 int main()
 {
     int vertices = 7;
     vector<Edge> graph[vertices];
-    
-    // 0th Node
+    bool isVisited[vertices] = {false};
+    int src = 0;
+
     graph[0].push_back(Edge(1, 5));
     graph[0].push_back(Edge(2, 2));
-
-    // 1st Node
     graph[1].push_back(Edge(0, 5));
     graph[1].push_back(Edge(3, 11));
-
-    // 2nd Node
     graph[2].push_back(Edge(0, 2));
     graph[2].push_back(Edge(4, 10));
-
-    // 3th Node
     graph[3].push_back(Edge(1, 11));
     graph[3].push_back(Edge(5, 12));
-
-    // 4th Node
     graph[4].push_back(Edge(2, 10));
     graph[4].push_back(Edge(5, 15));
-
-    // 5th Node
     graph[5].push_back(Edge(3, 12));
     graph[5].push_back(Edge(4, 15));
     graph[5].push_back(Edge(6, 1));
-
-    // 6th Node
     graph[6].push_back(Edge(5, 1));
+
+    bfs(graph, src, isVisited);
 
     return 0;
 }

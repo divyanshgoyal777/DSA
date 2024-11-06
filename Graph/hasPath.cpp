@@ -4,12 +4,12 @@ using namespace std;
 class Edge
 {
 public:
-    int dist;
+    int dest;
     int weight;
 
-    Edge(int dist, int weight)
+    Edge(int dest, int weight)
     {
-        this->dist = dist;
+        this->dest = dest;
         this->weight = weight;
     }
 };
@@ -24,7 +24,7 @@ bool hasPath(vector<Edge> graph[], int src, int dest, bool isVisited[])
     for (int i = 0; i < graph[src].size(); i++)
     {
         Edge e = graph[src][i];
-        if (!isVisited[e.dist] && hasPath(graph, e.dist, dest, isVisited))
+        if (!isVisited[e.dest] && hasPath(graph, e.dest, dest, isVisited))
         {
             return true;
         }

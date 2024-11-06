@@ -4,12 +4,12 @@ using namespace std;
 class Edge
 {
 public:
-    int dist;
+    int dest;
     int weight;
 
-    Edge(int dist, int weight)
+    Edge(int dest, int weight)
     {
-        this->dist = dist;
+        this->dest = dest;
         this->weight = weight;
     }
 };
@@ -25,9 +25,9 @@ void dfs(vector<Edge> graph[], int src, bool isVisited[])
     for (int i = 0; i < graph[src].size(); i++)
     {
         Edge e = graph[src][i];
-        if (!isVisited[e.dist])
+        if (!isVisited[e.dest])
         {
-            dfs(graph, e.dist, isVisited);
+            dfs(graph, e.dest, isVisited);
         }
     }
 }
