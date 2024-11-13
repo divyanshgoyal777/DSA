@@ -53,8 +53,8 @@ public:
 int main()
 {
     BinaryTree tree;
-
-    cout << "Height of the tree: " << tree.height(tree.root) << endl;\
+    
+    cout << "Height of the tree: " << tree.height(tree.root) << endl;
 
     return 0;
 }
