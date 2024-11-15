@@ -20,7 +20,7 @@ void prime(bool arr[], int n)
             }
         }
     }
-    cout << "Number of primes up to " << n << ": " << count << endl;
+    cout << "Number of primes: " << count << endl;
 }
 
 int main()
