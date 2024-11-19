@@ -71,7 +71,7 @@ bool hasCycle(vector<Edge> graph[], int vertices)
     {
         if (!isVisited[i])
         {
-            if(hasCycleUtil(graph, isVisited, i, -1))
+            if (hasCycleUtil(graph, isVisited, i, -1))
             {
                 return true;
             }
