@@ -23,6 +23,7 @@ void createGraph(vector<Edge> graph[])
 void kruskal(vector<Edge> graph[], int vertices, int src){
     priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
     vector<bool> visited(vertices, false);
+    
 }
 
 int main()
