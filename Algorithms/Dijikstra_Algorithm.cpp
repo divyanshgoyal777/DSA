@@ -31,21 +31,20 @@ void dijkstra(vector<Edge> graph[], int vertices, int src)
 
     while (!pq.empty())
     {
-        int currDist = pq.top().first;
-        int currNode = pq.top().second;
+        int u = pq.top().second;
+        int d = pq.top().first;
         pq.pop();
 
-        if (visited[currNode])
+        if (d > dist[u])
             continue;
-        visited[currNode] = true;
 
-        for (Edge e : graph[currNode])
+        for (auto &edge : graph[u]) // Use graph[u] here
         {
-            int nextNode = e.dest, weight = e.weight;
-            if (currDist + weight < dist[nextNode])
+            int v = edge.dest, weight = edge.weight;
+            if (dist[u] + weight < dist[v])
             {
-                dist[nextNode] = currDist + weight;
-                pq.push({dist[nextNode], nextNode});
+                dist[v] = dist[u] + weight;
+                pq.push({dist[v], v});
             }
         }
     }

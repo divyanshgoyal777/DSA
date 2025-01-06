@@ -4,65 +4,60 @@ using namespace std;
 class Edge
 {
 public:
-    int dest;
-    int weight;
-
-    Edge(int dest, int weight)
-    {
-        this->dest = dest;
-        this->weight = weight;
-    }
+    int src, dest, weight;
+    Edge(int src, int dest, int weight) : src(src), dest(dest), weight(weight) {}
 };
 
-void createGraph(vector<Edge> graph[])
+void createEdges(vector<Edge> &edges)
 {
-    graph[0].push_back(Edge(1, 2));
-    graph[0].push_back(Edge(2, 4));
-    graph[1].push_back(Edge(2, 1));
-    graph[1].push_back(Edge(3, 7));
-    graph[2].push_back(Edge(4, 3));
-    graph[3].push_back(Edge(4, 2));
-    graph[3].push_back(Edge(5, 1));
-    graph[4].push_back(Edge(5, 5));
+    edges.push_back(Edge(0, 1, 2));
+    edges.push_back(Edge(0, 2, 4));
+    edges.push_back(Edge(1, 2, 1));
+    edges.push_back(Edge(1, 3, 7));
+    edges.push_back(Edge(2, 4, 3));
+    edges.push_back(Edge(3, 4, 2));
+    edges.push_back(Edge(3, 5, 1));
+    edges.push_back(Edge(4, 5, 5));
 }
 
-void bellmanFord(vector<Edge> graph[], int vertices, int src)
+void bellmanFord(int vertices, int edgesCount, vector<Edge> &edges, int src)
 {
-    vector<int> distance(vertices, INT_MAX);
-    distance[src] = 0;
+    vector<int> dist(vertices, INT_MAX);
+    dist[src] = 0;
 
     for (int i = 0; i < vertices - 1; i++)
     {
-        for (int u = 0; u < vertices; u++)
+        for (auto &edge : edges)
         {
-            for (Edge edge : graph[u])
+            if (dist[edge.src] != INT_MAX && dist[edge.src] + edge.weight < dist[edge.dest])
             {
-                int v = edge.dest;
-                int weight = edge.weight;
-                if (distance[u] != INT_MAX && distance[u] + weight < distance[v])
-                {
-                    distance[v] = distance[u] + weight;
-                }
+                dist[edge.dest] = dist[edge.src] + edge.weight;
             }
         }
     }
 
-    cout << "Vertex\tDistance from Source" << endl;
+    // Check for negative weight cycles
+    for (auto &edge : edges)
+    {
+        if (dist[edge.src] != INT_MAX && dist[edge.src] + edge.weight < dist[edge.dest])
+        {
+            cout << "Negative weight cycle detected!\n";
+            return;
+        }
+    }
+
+    cout << "Shortest distances from source " << src << ":\n";
     for (int i = 0; i < vertices; i++)
     {
-        cout << i << "\t" << distance[i] << endl;
+        cout << "Vertex " << i << ": " << (dist[i] == INT_MAX ? "Infinity" : to_string(dist[i])) << endl;
     }
 }
 
-    int main()
-    {
-        int vertices = 7;
-        vector<Edge> graph[vertices];
-        bool isVisited[vertices] = {false};
-        int src = 0;
-
-        createGraph(graph);
-        bellmanFord(graph, vertices, src);
-
-        return 0;
-    }
+int main()
+{
+    int vertices = 6;
+    vector<Edge> edges;
+    createEdges(edges);
+    bellmanFord(vertices, edges.size(), edges, 0);
+    return 0;
+}

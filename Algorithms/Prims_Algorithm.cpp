@@ -4,61 +4,61 @@ using namespace std;
 class Edge
 {
 public:
-    int dest;
-    int weight;
-
-    Edge(int dest, int weight)
-    {
-        this->dest = dest;
-        this->weight = weight;
-    }
+    int dest, weight;
+    Edge(int dest, int weight) : dest(dest), weight(weight) {}
 };
 
 void createGraph(vector<Edge> graph[])
 {
-    graph[0].push_back(Edge(1, 10));
+    graph[0].push_back(Edge(1, 2));
     graph[0].push_back(Edge(2, 4));
-    graph[1].push_back(Edge(3, 3));
-    graph[1].push_back(Edge(2, 2));
-    graph[2].push_back(Edge(4, 1));
-    graph[4].push_back(Edge(1, 6));
+    graph[1].push_back(Edge(2, 1));
+    graph[1].push_back(Edge(3, 7));
+    graph[2].push_back(Edge(4, 3));
+    graph[3].push_back(Edge(4, 2));
+    graph[3].push_back(Edge(5, 1));
+    graph[4].push_back(Edge(5, 5));
 }
 
-void primsAlgorithm(vector<Edge> graph[], int vertices)
+void primMST(vector<Edge> graph[], int vertices)
 {
-    priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
-    vector<bool> visited(vertices, false);
-    int mstCost = 0;
-    pq.push(make_pair(0, 0));
+    vector<int> key(vertices, INT_MAX), parent(vertices, -1);
+    vector<bool> inMST(vertices, false);
+
+    priority_queue<pair<int, int>, vector<pair<int, int>>, greater<>> pq;
+    key[0] = 0;
+    pq.push({0, 0});
 
     while (!pq.empty())
     {
-        pair<int, int> current = pq.top();
+        int u = pq.top().second;
         pq.pop();
-        int weight = current.first;
-        int curr = current.second;
-        if (visited[curr])
-            continue;
-        visited[curr] = true;
-        mstCost += weight;
-        for (Edge edge : graph[curr])
+
+        inMST[u] = true;
+        for (auto &edge : graph[u])
         {
-            if (!visited[edge.dest])
+            int v = edge.dest, weight = edge.weight;
+            if (!inMST[v] && weight < key[v])
             {
-                pq.push(make_pair(edge.weight, edge.dest));
+                key[v] = weight;
+                parent[v] = u;
+                pq.push({key[v], v});
             }
         }
     }
-    cout << "Cost of the Minimum Spanning Tree (MST): " << mstCost << endl;
+
+    cout << "Minimum Spanning Tree:\n";
+    for (int i = 1; i < vertices; i++)
+    {
+        cout << parent[i] << " - " << i << "\n";
+    }
 }
 
 int main()
 {
-    int vertices = 5;
+    int vertices = 6;
     vector<Edge> graph[vertices];
-
     createGraph(graph);
-    primsAlgorithm(graph, vertices);
-
+    primMST(graph, vertices);
     return 0;
 }
